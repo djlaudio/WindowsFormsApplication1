@@ -44,10 +44,10 @@ namespace WindowsFormsApplication1
                 //byte[] k = { 128, 128, 128, 128, 128, 128, 128, 128, 128, 128 };
                 //byte[] Iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-                var myTxtList = convertToBitList(new BitArray(txtArray));
+                var encodedTxtList = convertToBitList(new BitArray(txtArray));
 
 
-                var CipherList = Xor(myTxtList, calculateZ(myTxtList.Count, initialState(clave, VectorI)));
+                var CipherList = Xor(encodedTxtList, keyStreamGen(encodedTxtList.Count, keyAndIVSetup(clave, VectorI)));
 
                 byte[] result = convertToBitArray(CipherList).ToByteArray();
                 string HEXXA = ByteArrayToHexaString(result);
@@ -89,9 +89,10 @@ namespace WindowsFormsApplication1
         }
 
 
-        public List<bool> initialState(byte[] key, byte[] IV)
+        public List<bool> keyAndIVSetup(byte[] key, byte[] IV)
 
-          //Este es similar a def __init__(self, key, iv):
+        //Este es similar a def __init__(self, key, iv):
+        // Tambien similar a 2.2 Key and IV setup en el pseudocodigo.
         {
             var keyBits = ByteToBitArrayReverse(key);
             var IVBits = ByteToBitArrayReverse(IV);
@@ -115,20 +116,20 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < (4 * 288); i++)
             {
-
+                //Inicializacion
                 //En python hace las 4 veces en un codigo, sin poner nada afuera como las 3 siguientes lineas
                 t1 = s[65] ^ (s[90] && s[91]) ^ s[92] ^ s[170];
                 t2 = s[161] ^ (s[174] && s[175]) ^ s[176] ^ s[263];
                 t3 = s[242] ^ (s[285] && s[286]) ^ s[287] ^ s[68];
 
-                s = sAsignation(s, t1, t2, t3);
+                s = sRotation(s, t1, t2, t3);
             }
 
             return s;
         }
 
         //Este método es el que tarda en ejecutarse más, haciendo todo más lento...
-        public List<bool> sAsignation(List<bool> s, bool t1, bool t2, bool t3)
+        public List<bool> sRotation(List<bool> s, bool t1, bool t2, bool t3)
         {
 
 //            Aca se asimila a
@@ -136,7 +137,7 @@ namespace WindowsFormsApplication1
 //                (s1, s2, . . . , s93) ← (t3, s1, . . . , s92)
 //(s94, s95, . . . , s177) ← (t1, s94, . . . , s176)
 
-            //y ser[ia parte del keystream generation.
+            //y ser[ia parte del keystream generation, sin embargo tambien lo llama KeyandIVSetup.
             s.Insert(0, t3);
 
             s.RemoveAt(93);
@@ -178,8 +179,9 @@ namespace WindowsFormsApplication1
             return regex.Replace(inputString, "");
         }
 
-        public List<bool> calculateZ(int lengthOfBitArray, List<bool> s)
+        public List<bool> keyStreamGen(int lengthOfBitArray, List<bool> s)
             //Este es def _gen_keystream(self):
+            //2.1 Key stream generation
 
         //Esta muy similar al keystreamgeneration. Ver las demas partes.
 
@@ -188,6 +190,10 @@ namespace WindowsFormsApplication1
 
             bool t1, t2, t3;
 
+//            The state bits are then rotated and the
+//process repeats itself until the requested N ≤ 2
+//64 bits of key stream have been
+//generated
             for (int i = 0; i < lengthOfBitArray; i++)
             {
                 t1 = s[65] ^ s[92];
@@ -201,6 +207,8 @@ namespace WindowsFormsApplication1
 
                 z.Add(t1 ^ t2 ^ t3);
 
+
+                //Actualizacion:
                 t1 = t1 ^ (s[90] && s[91]) ^ s[170];
                 t2 = t2 ^ (s[174] && s[175]) ^ s[263];
                 t3 = t3 ^ (s[285] && s[286]) ^ s[68];
@@ -211,7 +219,7 @@ namespace WindowsFormsApplication1
 //t2 ← t2 + s175 · s176 + s264
 //t3 ← t3 + s286 · s287 + s69
 
-                s = sAsignation(s, t1, t2, t3);
+                s = sRotation(s, t1, t2, t3);
             }
 
             return z;
@@ -303,7 +311,7 @@ namespace WindowsFormsApplication1
 
                 byte[] bytesFromHexa = StringToByteArray(HEXXA);
                 var ListaBytes = convertToBitList(new BitArray(bytesFromHexa));
-                var ListaCifrada = Xor(ListaBytes, calculateZ(ListaBytes.Count, initialState(clave, VectorI)));
+                var ListaCifrada = Xor(ListaBytes, keyStreamGen(ListaBytes.Count, keyAndIVSetup(clave, VectorI)));
                 byte[] result = convertToBitArray(ListaCifrada).ToByteArray();
 
 
