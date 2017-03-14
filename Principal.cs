@@ -90,6 +90,8 @@ namespace WindowsFormsApplication1
 
 
         public List<bool> initialState(byte[] key, byte[] IV)
+
+          //Este es similar a def __init__(self, key, iv):
         {
             var keyBits = ByteToBitArrayReverse(key);
             var IVBits = ByteToBitArrayReverse(IV);
@@ -168,6 +170,8 @@ namespace WindowsFormsApplication1
         }
 
         public List<bool> calculateZ(int lengthOfBitArray, List<bool> s)
+            //Este es def _gen_keystream(self):
+
         {
             var z = new List<bool>();
 
@@ -176,8 +180,8 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < lengthOfBitArray; i++)
             {
                 t1 = s[65] ^ s[92];
-                t2 = s[161] ^ s[176];
-                t3 = s[242] ^ s[287];
+                t2 = s[168] ^ s[183];
+                t3 = s[249] ^ s[294];
 
                 z.Add(t1 ^ t2 ^ t3);
 
@@ -239,6 +243,8 @@ namespace WindowsFormsApplication1
         }
 
         public List<bool> Xor(List<bool> mylist, List<bool> TrvList)
+        //Este es equivalente a def encrypt(self, message, output):
+
         {
             var resultBitList = new List<bool>();
             //Le puse esto para que no me calcule la cabecera del .bmp
