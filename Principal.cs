@@ -115,6 +115,8 @@ namespace WindowsFormsApplication1
 
             for (int i = 0; i < (4 * 288); i++)
             {
+
+                //En python hace las 4 veces en un codigo, sin poner nada afuera como las 3 siguientes lineas
                 t1 = s[65] ^ (s[90] && s[91]) ^ s[92] ^ s[170];
                 t2 = s[161] ^ (s[174] && s[175]) ^ s[176] ^ s[263];
                 t3 = s[242] ^ (s[285] && s[286]) ^ s[287] ^ s[68];
@@ -128,6 +130,13 @@ namespace WindowsFormsApplication1
         //Este método es el que tarda en ejecutarse más, haciendo todo más lento...
         public List<bool> sAsignation(List<bool> s, bool t1, bool t2, bool t3)
         {
+
+//            Aca se asimila a
+
+//                (s1, s2, . . . , s93) ← (t3, s1, . . . , s92)
+//(s94, s95, . . . , s177) ← (t1, s94, . . . , s176)
+
+            //y ser[ia parte del keystream generation.
             s.Insert(0, t3);
 
             s.RemoveAt(93);
@@ -172,6 +181,8 @@ namespace WindowsFormsApplication1
         public List<bool> calculateZ(int lengthOfBitArray, List<bool> s)
             //Este es def _gen_keystream(self):
 
+        //Esta muy similar al keystreamgeneration. Ver las demas partes.
+
         {
             var z = new List<bool>();
 
@@ -180,14 +191,25 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < lengthOfBitArray; i++)
             {
                 t1 = s[65] ^ s[92];
-                t2 = s[168] ^ s[183];
-                t3 = s[249] ^ s[294];
+                t2 = s[161] ^ s[176];
+                t3 = s[242] ^ s[287];
+
+                //lock anterior fue modificado para que sea identico a 
+//                t1 ← s66 + s93
+//t2 ← s162 + s177
+//t3 ← s243 + s288
 
                 z.Add(t1 ^ t2 ^ t3);
 
                 t1 = t1 ^ (s[90] && s[91]) ^ s[170];
                 t2 = t2 ^ (s[174] && s[175]) ^ s[263];
                 t3 = t3 ^ (s[285] && s[286]) ^ s[68];
+
+                //lo anterior es
+
+//                t1 ← t1 + s91 · s92 + s171
+//t2 ← t2 + s175 · s176 + s264
+//t3 ← t3 + s286 · s287 + s69
 
                 s = sAsignation(s, t1, t2, t3);
             }
