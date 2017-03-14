@@ -1,0 +1,9 @@
+c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\obj\Debug\Trivium.csproj.GenerateResource.Cache
+c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\obj\Debug\Trivium.csprojResolveAssemblyReference.cache
+c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Principal.resources
