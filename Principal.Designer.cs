@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
-            this.rtInput = new System.Windows.Forms.TextBox();
             this.btnCifrar = new System.Windows.Forms.Button();
             this.rtOutput = new System.Windows.Forms.TextBox();
             this.btnDescifrar = new System.Windows.Forms.Button();
@@ -37,42 +36,39 @@
             this.txtVI = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtFile = new System.Windows.Forms.TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
-            // 
-            // rtInput
-            // 
-            this.rtInput.Location = new System.Drawing.Point(26, 98);
-            this.rtInput.Multiline = true;
-            this.rtInput.Name = "rtInput";
-            this.rtInput.Size = new System.Drawing.Size(275, 93);
-            this.rtInput.TabIndex = 0;
             // 
             // btnCifrar
             // 
-            this.btnCifrar.Location = new System.Drawing.Point(327, 19);
+            this.btnCifrar.Location = new System.Drawing.Point(406, 18);
             this.btnCifrar.Name = "btnCifrar";
             this.btnCifrar.Size = new System.Drawing.Size(75, 23);
-            this.btnCifrar.TabIndex = 1;
+            this.btnCifrar.TabIndex = 5;
             this.btnCifrar.Text = "Encriptar";
             this.btnCifrar.UseVisualStyleBackColor = true;
             this.btnCifrar.Click += new System.EventHandler(this.button1_Click);
             // 
             // rtOutput
             // 
-            this.rtOutput.Location = new System.Drawing.Point(327, 98);
+            this.rtOutput.Location = new System.Drawing.Point(44, 121);
             this.rtOutput.Multiline = true;
             this.rtOutput.Name = "rtOutput";
-            this.rtOutput.Size = new System.Drawing.Size(237, 93);
-            this.rtOutput.TabIndex = 2;
+            this.rtOutput.Size = new System.Drawing.Size(520, 93);
+            this.rtOutput.TabIndex = 4;
             // 
             // btnDescifrar
             // 
-            this.btnDescifrar.Location = new System.Drawing.Point(431, 19);
+            this.btnDescifrar.Location = new System.Drawing.Point(489, 18);
             this.btnDescifrar.Name = "btnDescifrar";
             this.btnDescifrar.Size = new System.Drawing.Size(75, 23);
-            this.btnDescifrar.TabIndex = 3;
+            this.btnDescifrar.TabIndex = 6;
             this.btnDescifrar.Text = "Desencriptar";
             this.btnDescifrar.UseVisualStyleBackColor = true;
             this.btnDescifrar.Click += new System.EventHandler(this.button1_Click_1);
@@ -82,14 +78,14 @@
             this.txtClave.Location = new System.Drawing.Point(151, 21);
             this.txtClave.Name = "txtClave";
             this.txtClave.Size = new System.Drawing.Size(150, 20);
-            this.txtClave.TabIndex = 18;
+            this.txtClave.TabIndex = 1;
             // 
             // txtVI
             // 
-            this.txtVI.Location = new System.Drawing.Point(151, 43);
+            this.txtVI.Location = new System.Drawing.Point(151, 44);
             this.txtVI.Name = "txtVI";
             this.txtVI.Size = new System.Drawing.Size(150, 20);
-            this.txtVI.TabIndex = 17;
+            this.txtVI.TabIndex = 2;
             // 
             // label2
             // 
@@ -109,32 +105,66 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Clave:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 82);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 13);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "Texto de entrada";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(338, 79);
+            this.label4.Location = new System.Drawing.Point(41, 105);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 13);
             this.label4.TabIndex = 20;
             this.label4.Text = "Texto de salida";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(41, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(46, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Archivo:";
+            // 
+            // txtFile
+            // 
+            this.txtFile.Location = new System.Drawing.Point(151, 69);
+            this.txtFile.Name = "txtFile";
+            this.txtFile.Size = new System.Drawing.Size(330, 20);
+            this.txtFile.TabIndex = 3;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(489, 67);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 23;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Location = new System.Drawing.Point(489, 220);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.TabIndex = 24;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(601, 235);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(586, 248);
+            this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.txtFile);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtClave);
             this.Controls.Add(this.txtVI);
             this.Controls.Add(this.label2);
@@ -142,7 +172,6 @@
             this.Controls.Add(this.btnDescifrar);
             this.Controls.Add(this.rtOutput);
             this.Controls.Add(this.btnCifrar);
-            this.Controls.Add(this.rtInput);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Principal";
             this.Text = "Trivium";
@@ -153,7 +182,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox rtInput;
         private System.Windows.Forms.Button btnCifrar;
         private System.Windows.Forms.TextBox rtOutput;
         private System.Windows.Forms.Button btnDescifrar;
@@ -161,8 +189,13 @@
         private System.Windows.Forms.TextBox txtVI;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtFile;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

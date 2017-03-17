@@ -7,3 +7,23 @@ c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsAppli
 c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\obj\Debug\Trivium.csprojResolveAssemblyReference.cache
 c:\Users\Luigi\documents\visual studio 2015\Projects\Solution1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Principal.resources
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\WindowsFormsApplication1-master\obj\Debug\WindowsFormsApplication1.Principal.resources
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\WindowsFormsApplication1-master\obj\Debug\Trivium.csproj.GenerateResource.Cache
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\WindowsFormsApplication1-master\bin\Debug\Trivium.exe.config
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\WindowsFormsApplication1-master\bin\Debug\Trivium.exe
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\WindowsFormsApplication1-master\bin\Debug\Trivium.pdb
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\WindowsFormsApplication1-master\obj\Debug\Trivium.Properties.Resources.resources
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\WindowsFormsApplication1-master\obj\Debug\Trivium.exe
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\WindowsFormsApplication1-master\obj\Debug\Trivium.pdb
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\Trivium Cipher\bin\Debug\Trivium.exe.config
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\Trivium Cipher\obj\Debug\Trivium.exe
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\Trivium Cipher\obj\Debug\Trivium.pdb
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\Trivium Cipher\bin\Debug\Trivium.exe
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\Trivium Cipher\bin\Debug\Trivium.pdb
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\Trivium Cipher\obj\Debug\Trivium.csprojResolveAssemblyReference.cache
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\Trivium Cipher\obj\Debug\WindowsFormsApplication1.Principal.resources
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\Trivium Cipher\obj\Debug\Trivium.Properties.Resources.resources
+C:\Users\drodriguez\Documents\U\Criptografía\tarea3\Trivium Cipher\obj\Debug\Trivium.csproj.GenerateResource.Cache
+C:\Users\Luigi\Documents\Visual Studio 2015\Projects\Trivium Cipher_C#\Trivium Cipher\bin\Debug\Trivium.exe.config
+C:\Users\Luigi\Documents\Visual Studio 2015\Projects\Trivium Cipher_C#\Trivium Cipher\obj\Debug\Trivium.exe
+C:\Users\Luigi\Documents\Visual Studio 2015\Projects\Trivium Cipher_C#\Trivium Cipher\obj\Debug\Trivium.pdb

@@ -1,5 +1,6 @@
 ﻿using Prototipo_Conversor_ImgBmp;
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,22 +28,34 @@ namespace WindowsFormsApplication1
         {
             try
             {
+                string rutaFile = txtFile.Text;
+                string TextoArchivo = string.Empty;
+                string clav;
+                string VI;
 
-                if (txtClave.Text.Length > 10 || txtVI.Text.Length > 10)
-                    throw new Exception("La clave o el VI no puede ser mayor de 10 dígitos.");
+                if (String.IsNullOrEmpty(rutaFile))
+                {
+                    throw new Exception("Por favor ingrese una ruta de archivo.");
+                }
 
-                string texto = QuitAccents( rtInput.Text);
-                string clav = llenaCeros(txtClave.Text);
-                string VI = llenaCeros(txtVI.Text);
+                TextoArchivo = File.ReadAllText(@rutaFile);
+
+                if (txtClave.Text.Length < 10)
+                    clav = llenaCeros(txtClave.Text);
+                else
+                    clav = (txtClave.Text);
+
+                if (txtVI.Text.Length < 10)
+                    VI = llenaCeros(txtVI.Text);
+                else
+                    VI = (txtVI.Text);
+
+                string texto = QuitAccents( TextoArchivo);
 
                 byte[] txtArray = Encoding.ASCII.GetBytes(texto);
 
                 byte[] clave = Encoding.ASCII.GetBytes(clav);
                 byte[] VectorI = Encoding.ASCII.GetBytes(VI);
-
-                //claves harcodeadas
-                //byte[] k = { 128, 128, 128, 128, 128, 128, 128, 128, 128, 128 };
-                //byte[] Iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
                 var encodedTxtList = convertToBitList(new BitArray(txtArray));
 
@@ -91,7 +104,6 @@ namespace WindowsFormsApplication1
 
         public List<bool> keyAndIVSetup(byte[] key, byte[] IV)
 
-        //Este es similar a def __init__(self, key, iv):
         // Tambien similar a 2.2 Key and IV setup en el pseudocodigo.
         {
             var keyBits = ByteToBitArrayReverse(key);
@@ -117,7 +129,6 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < (4 * 288); i++)
             {
                 //Inicializacion
-                //En python hace las 4 veces en un codigo, sin poner nada afuera como las 3 siguientes lineas
                 t1 = s[65] ^ (s[90] && s[91]) ^ s[92] ^ s[170];
                 t2 = s[161] ^ (s[174] && s[175]) ^ s[176] ^ s[263];
                 t3 = s[242] ^ (s[285] && s[286]) ^ s[287] ^ s[68];
@@ -132,12 +143,9 @@ namespace WindowsFormsApplication1
         public List<bool> sRotation(List<bool> s, bool t1, bool t2, bool t3)
         {
 
-//            Aca se asimila a
 
-//                (s1, s2, . . . , s93) ← (t3, s1, . . . , s92)
-//(s94, s95, . . . , s177) ← (t1, s94, . . . , s176)
 
-            //y ser[ia parte del keystream generation, sin embargo tambien lo llama KeyandIVSetup.
+            //y seria parte del keystream generation, sin embargo tambien lo llama KeyandIVSetup.
             s.Insert(0, t3);
 
             s.RemoveAt(93);
@@ -180,8 +188,6 @@ namespace WindowsFormsApplication1
         }
 
         public List<bool> keyStreamGen(int lengthOfBitArray, List<bool> s)
-            //Este es def _gen_keystream(self):
-            //2.1 Key stream generation
 
         //Esta muy similar al keystreamgeneration. Ver las demas partes.
 
@@ -190,34 +196,23 @@ namespace WindowsFormsApplication1
 
             bool t1, t2, t3;
 
-//            The state bits are then rotated and the
-//process repeats itself until the requested N ≤ 2
-//64 bits of key stream have been
-//generated
+
             for (int i = 0; i < lengthOfBitArray; i++)
             {
                 t1 = s[65] ^ s[92];
                 t2 = s[161] ^ s[176];
                 t3 = s[242] ^ s[287];
 
-                //lock anterior fue modificado para que sea identico a 
-//                t1 ← s66 + s93
-//t2 ← s162 + s177
-//t3 ← s243 + s288
+
 
                 z.Add(t1 ^ t2 ^ t3);
 
 
-                //Actualizacion:
                 t1 = t1 ^ (s[90] && s[91]) ^ s[170];
                 t2 = t2 ^ (s[174] && s[175]) ^ s[263];
                 t3 = t3 ^ (s[285] && s[286]) ^ s[68];
 
-                //lo anterior es
 
-//                t1 ← t1 + s91 · s92 + s171
-//t2 ← t2 + s175 · s176 + s264
-//t3 ← t3 + s286 · s287 + s69
 
                 s = sRotation(s, t1, t2, t3);
             }
@@ -227,8 +222,7 @@ namespace WindowsFormsApplication1
 
 
 
-        //Antes usaba las extensiones de BitArray y ByteArray para hacerlo mejor,
-        //pero al agregar las listas, los métodos los dejé acá :(
+
         public List<bool> convertToBitList(BitArray bits)
         {
             var bitList = new List<bool>();
@@ -273,16 +267,10 @@ namespace WindowsFormsApplication1
         }
 
         public List<bool> Xor(List<bool> mylist, List<bool> TrvList)
-        //Este es equivalente a def encrypt(self, message, output):
 
         {
             var resultBitList = new List<bool>();
-            //Le puse esto para que no me calcule la cabecera del .bmp
-            //Sería mejor hacerlo desde afuera, no pasándole esos bits y así dejar el XOR genérico
-            //var firstBitOfDataInBMPFormat = (54 * 8);
-
-            //for (int i = 0; i < firstBitOfDataInBMPFormat; i++)
-            //    resultBitList.Add(aBitList[i]);
+ 
             for (int i = 0; i < mylist.Count; i++)
                 resultBitList.Add(mylist[i] ^ TrvList[i]);
 
@@ -294,21 +282,37 @@ namespace WindowsFormsApplication1
 
             try
             {
+                string rutaFile = txtFile.Text;
+                string TextoArchivo = string.Empty;
 
-                if (txtClave.Text.Length > 10 || txtVI.Text.Length > 10)
-                    throw new Exception("La clave o el VI no puede ser mayor de 10 dígitos.");
+                string clav;
+                string VI;
 
-                string clav = llenaCeros(txtClave.Text);
-                string VI = llenaCeros(txtVI.Text);
+                if (String.IsNullOrEmpty(rutaFile))
+                {
+                    throw new Exception("Por favor ingrese una ruta de archivo.");
+                }
+
+                TextoArchivo = File.ReadAllText(@rutaFile);
+
+                if (txtClave.Text.Length < 10 )
+                     clav = llenaCeros(txtClave.Text);
+                else
+                    clav = (txtClave.Text);
+
+                if ( txtVI.Text.Length < 10)
+                    VI = llenaCeros(txtVI.Text);
+                else
+                     VI = (txtVI.Text);
+                            
+                
 
                 byte[] clave = Encoding.ASCII.GetBytes(clav);
                 byte[] VectorI = Encoding.ASCII.GetBytes(VI);
-                //claves harcodeadas
-                //byte[] k = { 128, 128, 128, 128, 128, 128, 128, 128, 128, 128 };
-                //byte[] Iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-                string HEXXA = rtInput.Text;
+                string HEXXA = TextoArchivo;
 
+                //Se pasa de Hexadecimal a bytes, para luego aplicar el XOR y volver a los bytes originales antes del cifrado.
                 byte[] bytesFromHexa = StringToByteArray(HEXXA);
                 var ListaBytes = convertToBitList(new BitArray(bytesFromHexa));
                 var ListaCifrada = Xor(ListaBytes, keyStreamGen(ListaBytes.Count, keyAndIVSetup(clave, VectorI)));
@@ -324,6 +328,47 @@ namespace WindowsFormsApplication1
             }
 
 
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    txtFile.Text = openFileDialog1.FileName;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            Stream myStream;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+ 
+                    string path = saveFileDialog1.FileName;
+                    File.WriteAllText(@saveFileDialog1.FileName + ".txt", rtOutput.Text);
+                    MessageBox.Show("Archivo guardado con éxito!.");
+                
+            }
         }
     }
 }
